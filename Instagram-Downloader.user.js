@@ -1,0 +1,45 @@
+// ==UserScript==
+// @name         Instagram Downloader
+// @namespace    https://github.com/NabiKAZ/instagram-downloader
+// @version      0.1
+// @description  Instagram Media Downloader For Web Version
+// @author       Nabi K.A.Z. <nabikaz@gmail.com>
+// @match        https://www.instagram.com/p/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    var existCondition = setInterval(function() {
+        var url = get_url();
+        if (url) {
+            var container = document.getElementsByClassName("_7b8eu _9dpug");
+            var tag_a = document.createElement("a");
+            tag_a.id = 'instagram_downloader_link';
+            tag_a.href = url;
+            tag_a.onmousemove = function() {
+                this.href = get_url();
+            };
+            var tag_img = document.createElement("img");
+            tag_img.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAABuUlEQVRYhe3WO2jVUBzH8Y/XFwq+qoJD6wtxErQ4OIgI4uZYBScXl7qIBRed3J3FQdChY11VBAXByUHBB4iIiotQxfpAHby1cUgOXGJyc5LmurQ/+EMe5////pKcc/5hUQtdSxvkbMAq/EbSrp1iLccZPMRsBk3wFTdxeJDwPXjZAy2LSaxtG34Q3yPgIZ5jc1vwEXyqAQ9xuy0DNxrAQ4xhHPfxBndxrA58I7rzMDBbcG0OZ2MNnKwAfMEh7M/iaKThLnbFGLhYUehVQc63CAMJzucTOwXF1sW4bKh/aucNHMepARp40c/AZUxhy4DgXUyX3RwXP8vnMwcSPMLukLgEq/Eem0rMfcAV/MnOZ3AtN+YcVmbHKzAhbVpl+owjeAanKxy/riiW1wg+VtQMW/cyuBox+DGGIuBbpbtf7Oc4AXciBz+R7pJtwRNc7+BnxJPBKO6VmNiGB9gZWStouKNgbfbRPmmT6Z2wAb6jJhx+wF5ps6jz6p5Ke/92vKuZ2xsXgpPJBslvpUu0KfwXhoOBNdlTNS3WJCby32M9bv0H8Bwu5eG9GpP+Ws20DJ6W9poD/eCLWnj6C898aFvxBYfrAAAAAElFTkSuQmCC';
+            tag_a.appendChild(tag_img);
+            container[0].appendChild(tag_a);
+
+            clearInterval(existCondition);
+        }
+    }, 100);
+
+    function get_url() {
+        var html = document.getElementsByClassName("_l6uaz");//video
+        if (! html.length) {
+            html = document.getElementsByClassName("_2di5p");//image
+        }
+        var url = '';
+        if (html.length) {
+            url = html[0].src;
+        }
+        return url;
+    }
+
+})();
