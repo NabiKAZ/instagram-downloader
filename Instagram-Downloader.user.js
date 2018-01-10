@@ -2,7 +2,7 @@
 // @name         Instagram Downloader
 // @namespace    https://github.com/NabiKAZ/instagram-downloader
 // @version      0.1
-// @license      GPL version 3
+// @license      GPL-3.0+; http://www.gnu.org/licenses/gpl-3.0.txt
 // @description  Instagram Media Downloader For Web Version
 // @author       Nabi K.A.Z. <nabikaz@gmail.com>
 // @match        https://www.instagram.com/p/*
