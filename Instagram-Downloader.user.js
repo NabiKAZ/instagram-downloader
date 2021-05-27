@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Instagram Downloader
 // @namespace    https://github.com/NabiKAZ/instagram-downloader
-// @version      0.1
+// @version      0.2
 // @license      GPL-3.0+; http://www.gnu.org/licenses/gpl-3.0.txt
 // @description  Instagram Media Downloader For Web Version
 // @author       Nabi K.A.Z. <nabikaz@gmail.com>
@@ -15,10 +15,11 @@
     var existCondition = setInterval(function() {
         var url = get_url();
         if (url) {
-            var container = document.getElementsByClassName("_7b8eu _9dpug");
+            var container = document.getElementsByTagName("header");
             var tag_a = document.createElement("a");
             tag_a.id = 'instagram_downloader_link';
             tag_a.href = url;
+            tag_a.style.marginRight = "30px";
             tag_a.onmousemove = function() {
                 this.href = get_url();
             };
@@ -32,13 +33,13 @@
     }, 100);
 
     function get_url() {
-        var html = document.getElementsByClassName("_l6uaz");//video
-        if (! html.length) {
-            html = document.getElementsByClassName("_2di5p");//image
+        var html = document.querySelector("meta[property='og:video']");//video
+        if (!html) {
+            html = document.querySelector("meta[property='og:image']");//image
         }
         var url = '';
-        if (html.length) {
-            url = html[0].src;
+        if (html) {
+            url = html.content;
         }
         return url;
     }
